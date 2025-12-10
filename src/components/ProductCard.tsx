@@ -1,5 +1,5 @@
 import type { Product } from "@/data/plants";
-import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Eye } from "lucide-react";
@@ -15,20 +15,23 @@ export function ProductCard({ product, onViewDetail }: ProductCardProps) {
       <div className="relative aspect-square overflow-hidden bg-muted">
         <img
           src={product.image}
-          alt={product.name}
+          alt={`Jual ${product.name} - Kios Baha Tani`}
           className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
+          loading="lazy"
         />
         <Badge 
           className="absolute top-3 right-3 shadow-sm" 
-          variant={product.category === "Obat" ? "default" : "secondary"}
+          // variant={product.category === "Obat" ? "default" : "secondary"}
+          // Simplified logic as Obat is removed
+          variant="secondary"
         >
           {product.category}
         </Badge>
       </div>
       <CardHeader className="p-4 pb-2">
-        <CardTitle className="text-lg line-clamp-1 group-hover:text-primary transition-colors">
+        <h3 className="text-lg font-semibold leading-none tracking-tight line-clamp-1 group-hover:text-primary transition-colors">
           {product.name}
-        </CardTitle>
+        </h3>
         <p className="text-sm text-muted-foreground line-clamp-2 h-10">
           {product.description}
         </p>

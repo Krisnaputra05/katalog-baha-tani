@@ -28,6 +28,20 @@ function App() {
     { id: "Pestisida", label: "Pestisida", icon: <Droplets className="w-5 h-5 text-red-400"/> }, // Reusing icon for now
     { id: "Peralatan", label: "Peralatan", icon: <Hammer className="w-5 h-5"/> },
   ];
+  
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    if (id === 'top') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.history.pushState({}, '', '/');
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        window.history.pushState({}, '', `/${id}`);
+      }
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background font-sans antialiased text-foreground selection:bg-primary selection:text-primary-foreground">
@@ -45,10 +59,10 @@ function App() {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-6">
-            <a href="#" className="font-medium text-sm hover:text-primary transition-colors">Beranda</a>
-            <a href="#katalog" className="font-medium text-sm hover:text-primary transition-colors">Katalog</a>
-            <a href="#about" className="font-medium text-sm hover:text-primary transition-colors">Tentang Kami</a>
-            <a href="#contact" className="font-medium text-sm hover:text-primary transition-colors">Kontak</a>
+            <a href="/" onClick={(e) => scrollToSection(e, 'top')} className="font-medium text-sm hover:text-primary transition-colors">Beranda</a>
+            <a href="/katalog" onClick={(e) => scrollToSection(e, 'katalog')} className="font-medium text-sm hover:text-primary transition-colors">Katalog</a>
+            <a href="/about" onClick={(e) => scrollToSection(e, 'about')} className="font-medium text-sm hover:text-primary transition-colors">Tentang Kami</a>
+            <a href="/contact" onClick={(e) => scrollToSection(e, 'contact')} className="font-medium text-sm hover:text-primary transition-colors">Kontak</a>
             <div className="relative w-64">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
@@ -71,10 +85,10 @@ function App() {
               </SheetTrigger>
               <SheetContent side="right">
                 <div className="flex flex-col gap-4 mt-8">
-                   <a href="#" className="text-lg font-medium">Beranda</a>
-                   <a href="#katalog" className="text-lg font-medium">Katalog</a>
-                   <a href="#about" className="text-lg font-medium">Tentang Kami</a>
-                    <a href="#contact" className="text-lg font-medium">Kontak</a>
+                   <a href="/" onClick={(e) => scrollToSection(e, 'top')} className="text-lg font-medium">Beranda</a>
+                   <a href="/katalog" onClick={(e) => scrollToSection(e, 'katalog')} className="text-lg font-medium">Katalog</a>
+                   <a href="/about" onClick={(e) => scrollToSection(e, 'about')} className="text-lg font-medium">Tentang Kami</a>
+                    <a href="/contact" onClick={(e) => scrollToSection(e, 'contact')} className="text-lg font-medium">Kontak</a>
                    <Input
                       type="search"
                       placeholder="Cari produk..."
@@ -88,8 +102,10 @@ function App() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative h-[650px] w-full overflow-hidden flex items-center justify-center">
+      <main>
+        {/* Hero Section */}
+        <section className="relative h-[650px] w-full overflow-hidden flex items-center justify-center">
+
         <div className="absolute inset-0">
             <img 
                 src="/images/hero.png" 
@@ -251,6 +267,8 @@ function App() {
         </div>
       </section>
 
+      </main>
+
       {/* Footer */}
       <footer id="contact" className="bg-slate-950 text-slate-200 pt-16 pb-8">
         <div className="container mx-auto px-4">
@@ -270,10 +288,10 @@ function App() {
                 <div>
                     <h4 className="font-bold text-white mb-4">Navigasi</h4>
                     <ul className="space-y-2 text-sm text-slate-400">
-                        <li><a href="#" className="hover:text-primary transition-colors">Beranda</a></li>
-                        <li><a href="#katalog" className="hover:text-primary transition-colors">Katalog Produk</a></li>
-                        <li><a href="#about" className="hover:text-primary transition-colors">Tentang Kami</a></li>
-                        <li><a href="#contact" className="hover:text-primary transition-colors">Hubungi Kami</a></li>
+                        <li><a href="/" onClick={(e) => scrollToSection(e, 'top')} className="hover:text-primary transition-colors">Beranda</a></li>
+                        <li><a href="/katalog" onClick={(e) => scrollToSection(e, 'katalog')} className="hover:text-primary transition-colors">Katalog Produk</a></li>
+                        <li><a href="/about" onClick={(e) => scrollToSection(e, 'about')} className="hover:text-primary transition-colors">Tentang Kami</a></li>
+                        <li><a href="/contact" onClick={(e) => scrollToSection(e, 'contact')} className="hover:text-primary transition-colors">Hubungi Kami</a></li>
                     </ul>
                 </div>
 
